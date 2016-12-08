@@ -1,0 +1,30 @@
+CFLAGS = -g 
+
+CC = gcc
+LIBS =  -lm 
+INCLUDES =
+OBJS = ChatServer.o ChatClient.o
+SRCS = ChatServer.c ChatClient.c
+HDRS = 
+
+
+all: ChatServer ChatClient
+
+
+# The variable $@ has the value of the target. In this case $@ = psort
+ChatServer: ChatServer.o ${OBJS}
+	${CC} ${CFLAGS} ${INCLUDES} -lpthread -o $@ ChatServer.o ${LIBS}
+
+ChatClient: ChatClient.o ${OBJS}
+	${CC} ${CFLAGS} -o $@ ChatClient.o ${LIBS}
+
+.c.o:
+	${CC} ${CFLAGS} ${INCLUDES} -c $<
+
+depend: 
+	makedepend ${SRCS}
+
+
+
+# DO NOT DELETE
+
